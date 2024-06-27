@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task5</title>
+    <style>
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            flex: 1;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            flex: 2;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            margin-right: 10px;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            flex: 1;
+            display: none; /* Initially hide error messages */
+        }
+        .error-show {
+            display: block; /* Show error messages when triggered */
+        }
+        .button {
+            margin: 5px;
+            border-radius: 4px;
+            border-width: 1.5px;
+        }
+        .button:hover {
+            border-color: #5eb9f1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name"><p id="nameError" class="error">This field is required</p>
+</div>
+
+<div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email"><p id="emailError" class="error">A valid email address is required</p>
+</div>
+
+<div class="form-group">
+    <label for="website">Website:</label>
+    <input type="text" id="website"><p id="websiteError" class="error">A valid URL is required</p>
+</div>
+
+<div class="form-group">
+    <label for="message">Message:</label>
+    <textarea id="message" rows="10" cols="50"></textarea><p id="messageError" class="error">This field is required</p>
+</div>
+
+<button class="button" onclick="validateForm()">Submit</button>
+
+<script>
+    function validateForm() {
+        document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(element => {
+            element.style.borderColor = '#ccc';
+        });
+
+        document.querySelectorAll('.error').forEach(error => {
+            error.classList.remove('error-show');
+        });
+
+        let name = document.getElementById('name').value.trim();
+        let email = document.getElementById('email').value.trim();
+        let website = document.getElementById('website').value.trim();
+        let message = document.getElementById('message').value.trim();
+        let isValid = true;
+
+        if (name === '') {
+            document.getElementById('name').style.borderColor = 'red';
+            document.getElementById('nameError').classList.add('error-show');
+            isValid = false;
+        }
+
+        if (email === '') {
+            document.getElementById('email').style.borderColor = 'red';
+            document.getElementById('emailError').classList.add('error-show');
+            isValid = false;
+        } else {
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email').style.borderColor = 'red';
+                document.getElementById('emailError').innerText = 'Please enter a valid email address';
+                document.getElementById('emailError').classList.add('error-show');
+                isValid = false;
+            }
+        }
+
+        if (website !== '') {
+            let urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+            if (!urlRegex.test(website)) {
+                document.getElementById('website').style.borderColor = 'red';
+                document.getElementById('websiteError').innerText = 'Please enter a valid URL';
+                document.getElementById('websiteError').classList.add('error-show');
+                isValid = false;
+            }
+        }
+
+        if (message === '') {
+            document.getElementById('message').style.borderColor = 'red';
+            document.getElementById('messageError').classList.add('error-show');
+            isValid = false;
+        }
+
+        if (isValid) {
+            alert('Form submitted successfully!');
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task4</title>
+    <style>
+        .button {
+            margin: 5px;
+            border-radius: 4px;
+            border-width: 1.5px;
+        }
+        .button:hover {
+            border-color: #5eb9f1;
+        }
+        .output {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<button class="button" onclick="showDate()">Show Date</button>
+<p id="dateOutput" class="output"></p>
+
+<br><br>
+
+<button class="button" onclick="showTime()">Show Time</button>
+<p id="timeOutput" class="output"></p>
+
+<script>
+    function showDate() {
+        let now = new Date();
+        let dateFormatted = `${now.getDate()}/${now.toLocaleString('default', { month: 'long' })}/${now.getFullYear()}`;
+        document.getElementById('dateOutput').innerText = dateFormatted;
+    }
+
+    function showTime() {
+        let now = new Date();
+        document.getElementById('timeOutput').innerText = now.toString();
+    }
+</script>
+
+</body>
+</html>

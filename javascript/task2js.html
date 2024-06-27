@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASK2</title>
+</head>
+<body>
+    <h1>Sort Letters in Alphabetical Order</h1>
+    <input type="text" id="stringInput" placeholder="Enter a string">
+    <button onclick="handleSort()">Sort Letters</button>
+
+    <script>
+        function sortString(str) {
+            let sortedStr = str.split('').sort().join('');
+            console.log(sortedStr);
+            return sortedStr;
+        }
+
+        function handleSort() {
+            let str = document.getElementById('stringInput').value;
+            sortString(str);
+        }
+    </script>
+</body>
+</html>
